@@ -9,7 +9,7 @@ import (
 )
 
 func GenerateJson() {
-	f, err := excelize.OpenFile("timetable1.xlsx")
+	f, err := excelize.OpenFile("timetable.xlsx")
 	defer func() {
 		if err = f.Close(); err != nil {
 			panic(err)
@@ -20,26 +20,27 @@ func GenerateJson() {
 
 	// Define categories to exclude
 	excludedCategories := map[string]bool{
-		"2ND ECE":          true,
-		"2ND YEAR ECE ENC": true,
-		"3RD ECE":          true,
-		"4TH ECE":          true,
-		"4TH YEAR B":       true,
-		"DLIT":             true,
-		"PG TIME TABLE":    true,
-		"PG TIME TABLE 1":  true,
-		"PG TIME TABLE1":   true,
+		// "2ND ECE":          true,
+		// "2ND YEAR ECE ENC": true,
+		"3RD ECE":         true,
+		"4TH ECE":         true,
+		"4TH YEAR B":      true,
+		"DLIT":            true,
+		"PG TIME TABLE":   true,
+		"PG TIME TABLE 1": true,
+		"PG TIME TABLE1":  true,
 	}
 
 	classes := make(map[string]map[int]string)
 	for _, sheet := range sheets {
+		sheet = strings.Trim(sheet, " ")
 		// Skip excluded categories
 		if excludedCategories[sheet] {
 			continue
 		}
 
 		temp := make(map[int]string)
-		rows, err := f.GetRows(sheet)
+		rows, _ := f.GetRows(sheet)
 		for i, d := range rows {
 			if i == 4 {
 				for j, k := range d {
@@ -54,7 +55,7 @@ func GenerateJson() {
 			}
 		}
 		classes[sheet] = temp
-		HandleError(err)
+		// HandleError(err)
 	}
 	ExcelToJson(classes, f)
 }

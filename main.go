@@ -60,7 +60,7 @@ func main() {
 		Classes: classes,
 	}
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/under-work", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/" {
 			errorPage.Execute(w, "This page is under construction !!(404)")
 			return
@@ -73,7 +73,7 @@ func main() {
 
 	// Backup route to access the original home page (for admin/testing)
 	home, _ := template.ParseFiles("./templates/home.html")
-	http.HandleFunc("/admin", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		err := home.Execute(w, h)
 		if err != nil {
 			log.Printf("Error while executing home template: %v", err)

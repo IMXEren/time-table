@@ -6007,5 +6007,13 @@
   "UTA021": {
     "name": "ENGINEERING DRAWING",
     "subjectCode": "UTA021"
+  },
+  "UMA401": {
+    "name": "PROBABILITY & STATISTICS",
+    "subjectCode": "UMA401"
+  },
+  "UTD003": {
+    "name": "APTITUDE SKILLS BUILDING",
+    "subjectCode": "UTD003"
   }
 }
